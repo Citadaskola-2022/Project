@@ -3,19 +3,22 @@
 declare(strict_types=1);
 
 require_once '../app/Car.php';
+require_once '../app/Driver.php';
 
 
 // Homework: Driver (name, surname, age)
 
-$car = (new Car(1000, 'AB-1234', 14.6))
+$car = (new Car('AB-1234', 14.6, 25000))
     ->addKilometers(200)
     ->addKilometers(500);
 
 $liters = $car->getConsumedLiters();
 
-$car = null;
-
 var_dump($liters);
+die();
+
+$dt = new \Driver();
+$dt2 = new \Driver();
 
 /**
  * stdClass examples
