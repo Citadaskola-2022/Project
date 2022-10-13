@@ -2,6 +2,12 @@
 
 declare(strict_types=1);
 
-//require __DIR__ . '/../bootstrap/app.php';
-//
-//
+spl_autoload_register(function ($class){
+    require_once __DIR__ . '/../' . lcfirst(str_replace('\\' , '/' , $class)) .'.php';
+});
+
+use Public\Invoices\Subscription\Bill as SubBill;
+
+$subBill = new SubBill();
+
+var_dump($subBill);
