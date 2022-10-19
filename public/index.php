@@ -6,7 +6,7 @@ spl_autoload_register(function ($class){
     require_once __DIR__ . '/../' . lcfirst(str_replace('\\' , '/' , $class)) .'.php';
 });
 
-use Public\Invoices\Subscription\Bill as SubBill;
+use app\Invoices\Subscription\Bill as SubBill;
 
 $subBill = new SubBill();
 
