@@ -17,4 +17,13 @@ $iphone->installApp('Duolingo');
 
 echo implode(', ', $iphone->getInstalledApps());
 
+if ($iphone->isApplicationInstalled('Settings ')) {
+    $iphone->turnOnSettings('DoNotDistrub');
+    $iphone->turnOnSettings('Mute');
+    $iphone->turnOnSettings('Light');
+
+    $iphone->turnOffSettings('Mute');
+}
+
+
 //require __DIR__ . '/../bootstrap/app.php';

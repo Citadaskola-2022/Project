@@ -35,7 +35,15 @@ class Phone {
 
     public function getInstalledApps(): array
     {
-        return $this->appList;
+        return array_keys(array_filter($this->appList, fn ($isInstalled) => !!$isInstalled));
+
+//        $list = [];
+//        foreach($this->appList as $app => $isInstalled) {
+//            if ($isInstalled) {
+//                $list[] = $app;
+//            }
+//        }
+//        return $list;
     }
 
     public function isApplicationInstalled(string $app): bool
