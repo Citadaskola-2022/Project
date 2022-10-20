@@ -28,9 +28,19 @@ class Phone {
         $this->appList[$app] = true;
     }
 
+    public function uninstallApp(string $app): void
+    {
+        $this->appList[$app] = false;
+    }
+
     public function getInstalledApps(): array
     {
         return $this->appList;
+    }
+
+    public function isApplicationInstalled(string $app): bool
+    {
+        return isset($this->appList[$app]);
     }
 
     public function getSize(): ?string
