@@ -6,10 +6,15 @@ spl_autoload_register(function ($class) {
     require_once __DIR__ . '/../' . lcfirst(str_replace('\\', '/', $class)) . '.php';
 });
 
-use \Roberts\Invoices\Subscription\Bill;
+$iphone = new \App\Phone(11, 'Apple', 144, 71.4);
+$android = new \App\Phone(22, 'Samsung');
 
-$subBill = new Bill();
+//echo $iphone->getSize();
 
-var_dump($subBill);
+$iphone->installApp('Facebook');
+$iphone->installApp('Instagram');
+$iphone->installApp('Duolingo');
+
+echo implode(', ', $iphone->getInstalledApps());
 
 //require __DIR__ . '/../bootstrap/app.php';
