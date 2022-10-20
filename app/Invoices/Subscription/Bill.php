@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Roberts\Invoices\Subscription;
+namespace App\Invoices\Subscription;
 
 use Roberts\Notifications\Email;
 
