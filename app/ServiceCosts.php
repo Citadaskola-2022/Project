@@ -23,13 +23,11 @@ class ServiceCosts
 
     private function prepareInvoice()
     {
-
     }
 
     private function sendEmail()
     {
         // ...
     }
-
 
 }
