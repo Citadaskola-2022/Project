@@ -7,7 +7,6 @@ spl_autoload_register(function ($class) {
 });
 
 $transaction = new \App\ServiceCosts(200);
-
 $transaction->process();
 
 //require __DIR__ . '/../bootstrap/app.php';
