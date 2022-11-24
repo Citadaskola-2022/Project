@@ -2,28 +2,13 @@
 
 declare(strict_types=1);
 
-spl_autoload_register(function ($class) {
-    require_once __DIR__ . '/../' . lcfirst(str_replace('\\', '/', $class)) . '.php';
-});
+require __DIR__ . '/../bootstrap/app.php';
 
-$iphone = new \App\Phone(11, 'Apple', 144, 71.4);
-$android = new \App\Phone(22, 'Samsung');
+$coffee = new \App\Cafe\Coffee();
 
-//echo $iphone->getSize();
+$coffee->prepare(50);
+$coffee->prepare(40);
+$coffee->prepare(30);
+$coffee->prepare(30);
 
-$iphone->installApp('Facebook');
-$iphone->installApp('Instagram');
-$iphone->installApp('Duolingo');
-
-echo implode(', ', $iphone->getInstalledApps());
-
-if ($iphone->isApplicationInstalled('Settings ')) {
-    $iphone->turnOnSettings('DoNotDistrub');
-    $iphone->turnOnSettings('Mute');
-    $iphone->turnOnSettings('Light');
-
-    $iphone->turnOffSettings('Mute');
-}
-
-
-//require __DIR__ . '/../bootstrap/app.php';
+$coffee->brew();
