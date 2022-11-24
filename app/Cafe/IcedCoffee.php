@@ -5,7 +5,7 @@ namespace App\Cafe;
 class IcedCoffee
 {
     private Coffee $coffee;
-    public int $ice = 0;
+    private int $ice = 0;
 
     public function __construct(\App\Cafe\Coffee $coffee)
     {
