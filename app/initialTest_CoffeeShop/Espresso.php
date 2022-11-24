@@ -17,7 +17,7 @@ class Espresso
     public function brew()
     {
         foreach ($this->portions as $i => $portion) {
-            echo sprintf('%d: adding %dml portion to cup' . PHP_EOL, $i + 1, $portion);
+            echo sprintf('%s: adding %dml portion to cup' . PHP_EOL, $i + 1, $portion);
         }
     }
 }
