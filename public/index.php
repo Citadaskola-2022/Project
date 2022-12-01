@@ -2,28 +2,43 @@
 
 declare(strict_types=1);
 
-spl_autoload_register(function ($class) {
-    require_once __DIR__ . '/../' . lcfirst(str_replace('\\', '/', $class)) . '.php';
-});
+require __DIR__ . '/../bootstrap/app.php';
 
-$iphone = new \App\Phone(11, 'Apple', 144, 71.4);
-$android = new \App\Phone(22, 'Samsung');
+use Doctrine\Inflector\InflectorFactory;
+use Ramsey\Uuid\Uuid;
 
-//echo $iphone->getSize();
+$transaction = new \App\ServiceCosts(111);
+//$transaction->process();
 
-$iphone->installApp('Facebook');
-$iphone->installApp('Instagram');
-$iphone->installApp('Duolingo');
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
+$dotenv->load();
 
-echo implode(', ', $iphone->getInstalledApps());
+//echo '<pre>';
+var_dump($_ENV['DB_USER']);
+var_dump($_ENV['DB_PASSWORD']);
 
-if ($iphone->isApplicationInstalled('Settings ')) {
-    $iphone->turnOnSettings('DoNotDistrub');
-    $iphone->turnOnSettings('Mute');
-    $iphone->turnOnSettings('Light');
+$inflector = InflectorFactory::create()->build();
 
-    $iphone->turnOffSettings('Mute');
-}
+$name = 'comment';
+printf(
+    'vienskaitlis: %s, daudzskaitlis: %s',
+    $name, $inflector->pluralize($name)
+);
+echo '<br>';
+
+$blogPost = 'This Is MY 4w350m3 Blog post';
+printf(
+    'title: %s, url: %s',
+    $blogPost, $inflector->urlize($blogPost)
+);
+echo '<br>';
 
 
-//require __DIR__ . '/../bootstrap/app.php';
+$uuid = Uuid::uuid4();
+printf(
+    "UUID: %s\nVersion: %d\n",
+    $uuid->toString(),
+    $uuid->getFields()->getVersion()
+);
+echo '<br>';
+
