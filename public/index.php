@@ -4,19 +4,25 @@ declare(strict_types=1);
 
 require __DIR__ . '/../bootstrap/app.php';
 
-// Polymorphism
+// Datubāzes
+// Router
 
-/*
-šādi gadījumi ir reti, kad index izsauc pa taisno
+// Unit test
 
-$collector = new \App\DeptCollection\Agency();
-$collectedAmount = $collector->collect(100);
-var_dump($collectedAmount);
+// Manual
 
-$collector = new \App\DeptCollection\Rocky();
-$collectedAmount = $collector->collect(100);
-var_dump($collectedAmount);
-*/
+// izmanto datubazi ar vairākām tabulām - user / subs /
+// ārējās bibleotekas - guzzlehttp/guzzle (API izsakumi), Carbon - Datums un Laiks
+// datu strukturas - objekti, masīvi
+// paroles tiek galbātas drošā veidā password_hash + password_verify
 
-(new \App\DeptCollection\Service())
-->collectDept(new \App\DeptCollection\Agency());
+$passwordStoredInDb = 'test';
+$passwordStoredInDb = password_hash($passwordStoredInDb, PASSWORD_BCRYPT);
+
+echo $passwordStoredInDb;
+echo '<br>';
+
+$enteredPassword = $_GET['password'];
+
+var_dump(password_verify($enteredPassword, $passwordStoredInDb));
+
