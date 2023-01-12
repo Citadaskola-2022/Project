@@ -2,13 +2,20 @@
 
 declare(strict_types=1);
 
+function summation($n) {
+    return $n > 0 ? summation($n-1) + $n : 0;
+}
+
+summation(8);
+
+
+
 require __DIR__ . '/../bootstrap/app.php';
 
-$customer = new \App\Company\Customer(42, 'Jane', 33, \App\Company\Gender::Female);
-$customer->setDiscountLevel(\App\Company\Discount::LEVEL_4);
-$customer->setWallet(100);
-$customer->buyItems('Coffee', 15, 2);
-$customer->buyItems('Cake', 7 , 1);
-//$customer->buyItems('Ice Cream', 0.75 , 5);
-
-$customer->display();
+//$router = new \App\Router();
+//$router->register('/', function () {
+//   echo 'Index';
+//});
+//$router->register('/advent-of-code/1', [\App\Controllers\AdventOfCode\Day1::class, 'index']);
+//
+//echo $router->resolve($_SERVER['REQUEST_URI']);
