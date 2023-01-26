@@ -1,3 +1,5 @@
+# https://github.com/joseluisq/alpine-php-fpm/blob/master/8.1-fpm/Dockerfile
+
 FROM php:8.1-fpm-alpine
 
 ARG USER
@@ -26,12 +28,21 @@ RUN sed -i "s/user = www-data/user = ${USER}/g" /usr/local/etc/php-fpm.d/www.con
 RUN sed -i "s/group = www-data/group = perm.to.write/g" /usr/local/etc/php-fpm.d/www.conf
 RUN echo "php_admin_flag[log_errors] = on" >> /usr/local/etc/php-fpm.d/www.conf
 
-#RUN docker-php-ext-install pdo pdo_mysql
-
-RUN apk add --no-cache $PHPIZE_DEPS \
+RUN set -eux \
+    && apk add --no-cache --virtual .build-deps $PHPIZE_DEPS \
     && apk add --update linux-headers \
+# Install xdebug
     && pecl install xdebug \
-    && docker-php-ext-enable xdebug
+    && docker-php-ext-enable xdebug \
+    && true \
+# Install sqlite \
+    && apk add sqlite sqlite3 \
+    && docker-php-ext-install pdo_sqlite \
+    && true \
+# Clean up build packages
+    && docker-php-source delete \
+    && apk del .build-deps \
+    && true
 
 USER ${USER}
 
