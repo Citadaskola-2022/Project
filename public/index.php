@@ -10,7 +10,7 @@
     <script src="https://unpkg.com/vue@3"></script>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-300 text-white h-full grid place-items-center">
+<body class="bg-gray-800 text-white h-full grid place-items-center">
     <div id="app"></div>
 
 

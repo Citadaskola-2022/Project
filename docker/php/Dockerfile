@@ -1,6 +1,9 @@
 # https://github.com/joseluisq/alpine-php-fpm/blob/master/8.1-fpm/Dockerfile
+# https://www.docker.com/blog/how-to-use-the-alpine-docker-official-image/
+# https://www.docker.com/blog/how-to-build-and-run-next-js-applications-with-docker-compose-nginx/
+# https://dockerlabs.collabnix.com/beginners/building-your-first-alpine-container.html
 
-FROM php:8.1-fpm-alpine
+FROM php:8.2-fpm-alpine
 
 ARG USER
 ARG UID
@@ -13,6 +16,8 @@ ENV GID=${GID}
 RUN mkdir -p /var/www/public
 
 WORKDIR /var/www
+
+ADD . /var/www
 
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 
@@ -36,8 +41,7 @@ RUN set -eux \
     && docker-php-ext-enable xdebug \
     && true \
 # Install sqlite \
-    && apk add sqlite sqlite3 \
-    && docker-php-ext-install pdo_sqlite \
+    && apk add sqlite \
     && true \
 # Clean up build packages
     && docker-php-source delete \

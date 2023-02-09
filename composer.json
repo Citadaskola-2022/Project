@@ -11,8 +11,10 @@
     ],
     "minimum-stability": "stable",
     "require": {
-        "php": "8.1.*",
-        "nesbot/carbon": "^2.64"
+        "php": "8.2.*",
+        "nesbot/carbon": "^2.64",
+        "ext-sqlite3": "*",
+        "ext-pdo": "*"
     },
     "autoload": {
         "psr-4": {

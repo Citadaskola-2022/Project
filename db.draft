@@ -1,0 +1,52 @@
+table: vehicle
+- id (INT + PRIMARY)
+- number (piem: AB-1234)
+- type (piem: truck, motorcycle, boat)
+- driver_id (INT, 4)
+- fuel_type (piem: petrol, diesel, electric)
+- updated_at (2023-02-01 12:23:53)
+
+1 | AB-1234 | truck | 4 | diesel
+
+table: vehicle_info
+- vehicle_id PRIMARY
+- name PRIMARY (piem: seats, doors, TA datums)
+- value (piem: 7, 5, 2023-10-07)
+
+1 | seat | 7
+1 | doors | 5
+1 | TA | 2023-10-07
+
+table: driver
+- id (INT + PRIMARY)
+- name (TEXT)
+- surname (TEXT)
+
+1 | Niks
+2 | Krišs
+3 | Enriko
+4 | Roberts
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,79 +1,100 @@
-import Form from './Form.js';
-import Saved from './Saved.js';
-import Test from './Test.js';
-
 export default {
-    components: {Form, Saved, Test },
-    template: `
-        <div class="grid grid-cols-3 gap-6">
-            <section>
-                <Form @submit.prevent="saveItem" :formItems="formItems" class="justify-self-start" />
-            </section>
-            <section>
-                <Test :item="preview"></Test>
-            </section>
-            <section>
-                <Saved :items="savedItems" />
-            </section>
-            
+  template: `
+    <div 
+        class="grid grid-cols-3 gap-6 bg-gray-600 divide-x"
+        style="height: 600px"
+    >
+      <div class="w-64 p-4">
+        <form @submit.prevent="save">
+          <label class="mb-4">
+            <p>Tips</p>
+            <select v-model="form.type" class="bg-gray-700">
+              <option>CPU</option>
+              <option>GPU</option>
+            </select>
+          </label>
+          
+          <label class="mb-4">
+            <p>Modelis:</p>
+            <input type="text" v-model="form.model" class="bg-gray-700" />
+          </label>
+          
+          <label class="mb-4">
+            <p>Cena</p>
+            <input type="number" v-model="form.price" class="bg-gray-700" />
+          </label>
+          
+          <p class="mb-4">
+            <button 
+              type="submit"
+              class="border"
+            >
+              Saglabāt
+            </button>
+          </p>
+        </form>  
+      </div>
+      <div class="w-64 p-4">
+          <p>Tips: {{form.type}}</p>
+          <p>Modelis: {{form.model}}</p>
+          <p>Cena: {{form.price}}</p>
+      </div>
+      <div class="p-4 divide-y">
+        <div v-for="item in saved">
+          <p>Tips: {{item.type}}</p>
+          <p>Modelis: {{item.model}}</p>
+          <p>Cena: {{item.price}}</p>
         </div>
+      </div>
+    </div>
     `,
-    data () {
-        return {
-            formItems: [
-                { value: '', name : 'Veids', id: 'type', type: 'select', options: ['RAM', 'CPU', 'GPU', 'Motherboard', 'PSU', 'HDD', 'SSD'] },
-                { value: '', name : 'Modelis', id: 'model', type: 'text', },
-                { value: '', name : 'Cena', id: 'price', type: 'number', },
-            ],
-            savedItems: [
-                {
-                    type: 'CPU',
-                    model: 'Intel Core i7-13700KF (8P+8E/24T, 3.40 GHz, 30 MB',
-                    price: '447.06'
-                },
-                {
-                    type: 'RAM',
-                    model: 'G.SKILL Trident Z5 Neo (AMD EXPO), DDR5, 32GB,',
-                    price: '199.58'
-                },
-                {
-                    type: 'GPU',
-                    model: 'NVIDIA GeForce RTX 3090 Ti, 24GB GDDR6X, Founders',
-                    price: '1484.96'
-                },
-                {
-                    type: 'GPU',
-                    model: 'Palit GeForce RTX 4090, 24GB GDDR6X, GameRock',
-                    price: '2195.00'
-                },
-                {
-                    type: 'RAM',
-                    model: 'Patriot Viper Steel 64GB Kit (2x32GB) DDR4-3200 CL16',
-                    price: '198.11'
-                },
-                {
-                    type: 'RAM',
-                    model: 'Samsung 32GB, DDR3L, 1600MHz, CL11',
-                    price: '200.16'
-                },
-            ]
-        }
-    },
-    methods: {
-        saveItem () {
-            this.savedItems.unshift(this.preview);
-            this.formItems.forEach(i => i.value = '');
-
-        }
-    },
-    computed: {
-        preview () {
-            return {
-                type: this.formItems[0].value,
-                model: this.formItems[1].value,
-                price: this.formItems[2].value
-            };
-
-        }
+  data() {
+    return {
+      form: {
+        type: '',
+        model: '',
+        price: ''
+      },
+      saved: [
+        {
+          type: 'GPU',
+          model: 'Testing test',
+          price: '42'
+        },
+        {
+          type: 'CPU',
+          model: 'Testing CPU',
+          price: '42'
+        },
+      ]
     }
+  },
+  methods: {
+    save() {
+      // ej.uz/salida
+
+
+      // fetch // axios // https://www.boredapi.com/api/activity
+      const item = {
+        type: this.form.type,
+        model: this.form.model,
+        price: this.form.price
+      }
+
+      if (item.type === '' || item.model === '' || item.price === '') {
+        return;
+      }
+
+      this.saved.unshift(item);
+      this.form.type = '';
+      this.form.model = '';
+      this.form.price = '';
+    }
+  },
+  computed: {
+    savedTest() {
+      return this.saved.filter(item => item.price > 50);
+    }
+
+  }
 }
