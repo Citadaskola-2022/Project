@@ -14,3 +14,5 @@ This is a base structure for the project.
 cp .env.example .env
 docker compose up -d
 ```
+
+test `docker exec -it <container_name> bash` test
