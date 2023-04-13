@@ -1,9 +1,9 @@
 <?php
 
-define('ROOT', dirname(__DIR__, 1));
-
-function view(string $path): void
+function view(string $path, ?array $attributes = []): void
 {
+    extract($attributes);
+
     require ROOT . '/views' . $path;
 }
 

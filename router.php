@@ -10,6 +10,8 @@ $routes = [
     '/project/goal' => 'controllers/project/goal.php',
     '/register' => 'controllers/users/register.php',
     '/logout' => 'controllers/users/logout.php',
+
+    '/posts' => 'controllers/posts/index.php',
 ];
 
 if (array_key_exists($uri, $routes)) {

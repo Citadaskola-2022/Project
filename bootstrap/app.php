@@ -2,12 +2,11 @@
 
 declare(strict_types=1);
 
-require __DIR__ . '/../vendor/autoload.php';
+define('ROOT', dirname(__DIR__, 1));
+
+require ROOT. '/vendor/autoload.php';
 
 session_start();
 
-
-
-new \App\Car();
-
-new \Carbon\CarbonImmutable();
+$dotenv = Dotenv\Dotenv::createImmutable(dirname(__DIR__));
+$dotenv->safeLoad();

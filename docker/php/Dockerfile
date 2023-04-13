@@ -1,38 +1,13 @@
-FROM php:8.1-fpm-alpine
-
-ARG USER
-ARG UID
-ARG GID
-
-ENV USER=${USER}
-ENV UID=${UID}
-ENV GID=${GID}
-
-RUN mkdir -p /var/www/public
+FROM php:8.2-fpm
 
 WORKDIR /var/www
 
+RUN apt-get update && apt-get install -y \
+  git \
+  curl \
+  zip \
+  unzip
+
+RUN docker-php-ext-install pdo_mysql
+
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
-
-# MacOS staff group's gid is 20, so is the dialout group in alpine linux. We're not using it, let's just remove it.
-RUN delgroup dialout
-
-# Create user to fix PHPs write permissions
-RUN addgroup -g ${GID} --system perm.to.write
-RUN adduser -G perm.to.write --system -D -s /bin/sh -u ${UID} ${USER}
-
-# Replace user and group PHP runs as
-RUN sed -i "s/user = www-data/user = ${USER}/g" /usr/local/etc/php-fpm.d/www.conf
-RUN sed -i "s/group = www-data/group = perm.to.write/g" /usr/local/etc/php-fpm.d/www.conf
-RUN echo "php_admin_flag[log_errors] = on" >> /usr/local/etc/php-fpm.d/www.conf
-
-#RUN docker-php-ext-install pdo pdo_mysql
-
-RUN apk add --no-cache $PHPIZE_DEPS \
-    && apk add --update linux-headers \
-    && pecl install xdebug \
-    && docker-php-ext-enable xdebug
-
-USER ${USER}
-
-CMD ["php-fpm", "-y", "/usr/local/etc/php-fpm.conf", "-R"]
